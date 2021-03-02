@@ -20,7 +20,7 @@ exports.hydrate = async (conn) => {
           return;
         }
       }
-      if (msg.messages) {
+      if (msg.messages.array[0]!==undefined) {
         if (
           msg.messages.array[0].key.fromMe &&
           msg.messages.array[0].message.conversation.toLowerCase().trim() ===
