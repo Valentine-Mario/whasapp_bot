@@ -38,7 +38,7 @@ exports.whatsapp = async (conn, req, res) => {
 
 exports.interactive_reply = async (conn, chat, number) => {
   const anwer = reply.answers();
-  const bad_reply=`Inavlid message option ‼️\n
+  const bad_reply=`Invalid message option ‼️\n
 Please Type *BACK* to go back to the main menu`
    if (chat.toLowerCase().trim() === "bola") {
     const bola = `Thank you for contacting Bola, Please type your question below.\n 
