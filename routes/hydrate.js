@@ -57,10 +57,10 @@ exports.hydrate = async (conn) => {
           return;
         } else {
           const state = await redis.get(`${msg.jid}`);
-          const msg_history = await conn.loadMessages(msg.jid, 100);
+          // const msg_history = await conn.loadMessages(msg.jid, 100);
           const anwer = reply.answers();
           //if state is null and has chat history
-          if (state === null && msg_history.messages.length > 2) {
+          if (state === null ) {
             //mark message as read
             await conn.chatRead(msg.jid);
             await redis.set(`${msg.jid}`, "welcome", "EX", 60 * 60 * 12);
@@ -70,17 +70,19 @@ exports.hydrate = async (conn) => {
               MessageType.text
             );
             return;
-          } else if (state === null && msg_history.messages.length < 3) {
-            //mark message as read
-            await conn.chatRead(msg.jid);
-            await redis.set(`${msg.jid}`, "welcome", "EX", 60 * 60 * 12);
-            await conn.sendMessage(
-              msg.jid,
-              new_customers + `\n\n${anwer["welcome"]}`,
-              MessageType.text
-            );
-            return;
-          } else if (
+          }
+          // } else if (state === null && msg_history.messages.length < 3) {
+          //   //mark message as read
+          //   await conn.chatRead(msg.jid);
+          //   await redis.set(`${msg.jid}`, "welcome", "EX", 60 * 60 * 12);
+          //   await conn.sendMessage(
+          //     msg.jid,
+          //     new_customers + `\n\n${anwer["welcome"]}`,
+          //     MessageType.text
+          //   );
+          //   return;
+          //}
+           else if (
             msg.messages.array[0].message.conversation.toLowerCase().trim() ===
             "back"
           ) {
