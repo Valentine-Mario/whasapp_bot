@@ -68,14 +68,16 @@ Thank you.❤️`,
 
     1: `For a very fast Response, please contact any of my personal assistants. (Click the link in front of their names)
 
+*FUNMI* tinyurl.com/2dtntcr5
+
+*QUWAM* tinyurl.com/5effnkdz
+
 *TUNJI* tinyurl.com/mrfpkf18
+*
+*LISA* tinyurl.com/nsock2o5
 
 *JAKE* tinyurl.com/4omaky7r
-    
-*LISA* tinyurl.com/nsock2o5
-        
-*QUWAM* tinyurl.com/5effnkdz
-    
+
 *PAUL* tinyurl.com/4kkpfnge
     
 *They are all directly connected to me(Bola Vendor) so please do not worry at all*
@@ -223,12 +225,13 @@ We do not advise anyone to proceed racksterli registrations between  12:00am - 6
 *DAYS OFF*
 Every member on this team, Take days off to take some rest. Please take note of the days below. 
 
-TUNJI - Tuesdays
-JAKE - Wednesdays
-LISA - Thursdays
-QUWAM - Fridays
-PAUL - Only Fully available on Saturdays
-BOLA - Saturdays and Saturdays 
+*FUNMI* - Mondays
+*TUNJI* - Tuesdays
+*JAKE* - Wednesdays
+*LISA* - Thursdays
+*QUWAM* - Fridays
+*PAUL* - Only Fully available on Saturdays
+*BOLA* - Saturdays and Saturdays 
 
 Thank you for contacting Bola ❤️
 To go back to the main menu - Type *Back*`,
@@ -252,6 +255,12 @@ To go back to the main menu - Type *Back*`,
 
     3: `The following accounts are the only verified account numbers given to me (Bola) and all my personal assistants by  Racksterli Establishment. 
 Please do not pay to any other account number not listed here🙏
+
+*FOR FUNMI* 
+Account number: 2289626629
+Bank name: ZENITH 
+Account type: SAVINGS 
+Full name: OJO FUNMILOLA AYOBAMI
 
 *FOR TUNJI*
 Account number: 2289241224
