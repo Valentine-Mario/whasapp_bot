@@ -20,6 +20,9 @@ exports.hydrate = async (conn) => {
           return;
         }
       }
+      if(msg.jid.includes("@g.us")){
+        await conn.chatRead(msg.jid);
+      }
       if (msg.messages!==undefined) {
         if (
           msg.messages.array[0].key.fromMe &&
@@ -49,7 +52,6 @@ exports.hydrate = async (conn) => {
           return;
         }
         if (
-          msg.jid.includes("@g.us") ||
           msg.jid.includes("status") ||
           msg.messages.array[0].key.fromMe ||
           msg.jid.includes("broadcast")

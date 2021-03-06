@@ -1,5 +1,5 @@
 const base_url = "https://whispering-hamlet-52006.herokuapp.com";
-// const base_url="http://localhost:3000"
+//const base_url="http://localhost:3000"
 document.getElementById("spc_form").style.display = "none";
 document.getElementById("oth_form").style.display = "none";
 document.getElementById("qrcode_scan").style.display = "none";
