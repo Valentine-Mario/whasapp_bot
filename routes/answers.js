@@ -152,11 +152,11 @@ To go back to the main menu - Type *Back*`,
 
 Please Join our community  to get updates and information on our availability and also keep you updated on all racksterli news .
 
-https://chat.whatsapp.com/CfSxhl7PhkL3ZO6cQRnfvq
+https://chat.whatsapp.com/I0EyZcV7ToR9E14ryar5uo
 
 We hate to keep you waiting 🙏🏻
 
-*please don't join if you are already in group 1,2,3,4&5*
+*please don't join if you are already in group 1,2,3,4,5&6*
 
 Welcome on board 👊🏻
 
