@@ -114,6 +114,8 @@ exports.hydrate = async (conn) => {
             return;
           }
         }
+      }else{
+        console.log("waiting...")
       }
     });
   } catch (e) {
