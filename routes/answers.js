@@ -152,7 +152,7 @@ To go back to the main menu - Type *Back*`,
 
 Please Join our community  to get updates and information on our availability and also keep you updated on all racksterli news .
 
-https://chat.whatsapp.com/I0EyZcV7ToR9E14ryar5uo
+https://chat.whatsapp.com/Egp6uPZ54N86zAldsLKBcB
 
 We hate to keep you waiting 🙏🏻
 
