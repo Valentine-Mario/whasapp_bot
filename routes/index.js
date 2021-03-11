@@ -20,6 +20,9 @@ router.post("/toggle", async (req, res) => {
     let auth = await redis.get("auth");
   
     conn.loadAuthInfo(JSON.parse(auth));
+    conn.connectOptions={
+      maxRetries: 5,
+    }
   
     await conn.connect();
     await wa_client.whatsapp(conn, req, res);

@@ -7,6 +7,7 @@ const reply = require("./answers");
 
 exports.hydrate = async (conn) => {
   try {
+    
     console.log("oh hello " + conn.user.name + "! You connected");
     conn.on("chat-update", async (msg) => {
       //avoid sending messages to group chat status, self or broadcast or none clients
@@ -25,7 +26,6 @@ exports.hydrate = async (conn) => {
         return;
       }
       if (msg.messages !== undefined) {
-        if (msg.messages.array[0].length > 0) {
           if (
             msg.messages.array[0].key.fromMe &&
             msg.messages.array[0].message.conversation.toLowerCase().trim() ===
@@ -124,7 +124,6 @@ exports.hydrate = async (conn) => {
               return;
             }
           }
-        }
       }
     });
   } catch (e) {
