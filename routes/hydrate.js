@@ -20,103 +20,115 @@ exports.hydrate = async (conn) => {
           return;
         }
       }
-      if(msg.jid.includes("@g.us")){
+      if (msg.jid.includes("@g.us")) {
         await conn.chatRead(msg.jid);
-        return
+        return;
       }
-      if (msg.messages!==undefined) {
-        if (
-          msg.messages.array[0].key.fromMe &&
-          msg.messages.array[0].message.conversation.toLowerCase().trim() ===
-            "stop"
-        ) {
-          await redis.set(
-            `${msg.messages.array[0].key.remoteJid}`,
-            "dont_reply",
-            "EX",
-            60 * 60 * 12
-          );
-          return;
-        }
-
-        if (
-          msg.messages.array[0].key.fromMe &&
-          msg.messages.array[0].message.conversation.toLowerCase().trim() ===
-            "continue"
-        ) {
-          await redis.set(
-            `${msg.messages.array[0].key.remoteJid}`,
-            "welcome",
-            "EX",
-            60 * 60 * 12
-          );
-          return;
-        }
-        if (
-          msg.jid.includes("status") ||
-          msg.messages.array[0].key.fromMe ||
-          msg.jid.includes("broadcast")||
-          msg.jid.includes("@g.us")
-        ) {
-          return;
-        } else {
-          const state = await redis.get(`${msg.jid}`);
-          // const msg_history = await conn.loadMessages(msg.jid, 100);
-          const anwer = reply.answers();
-          //if state is null and has chat history
-          if (state === null ) {
-            //mark message as read
-            await conn.chatRead(msg.jid);
-            await redis.set(`${msg.jid}`, "welcome", "EX", 60 * 60 * 12);
-            await conn.sendMessage(
-              msg.jid,
-              old_customers + `\n\n${anwer["welcome"]}`,
-              MessageType.text
+      if (msg.messages !== undefined) {
+        if (msg.messages.array[0].length > 0) {
+          if (
+            msg.messages.array[0].key.fromMe &&
+            msg.messages.array[0].message.conversation.toLowerCase().trim() ===
+              "stop"
+          ) {
+            await redis.set(
+              `${msg.messages.array[0].key.remoteJid}`,
+              "dont_reply",
+              "EX",
+              60 * 60 * 12
             );
             return;
           }
-          // } else if (state === null && msg_history.messages.length < 3) {
-          //   //mark message as read
-          //   await conn.chatRead(msg.jid);
-          //   await redis.set(`${msg.jid}`, "welcome", "EX", 60 * 60 * 12);
-          //   await conn.sendMessage(
-          //     msg.jid,
-          //     new_customers + `\n\n${anwer["welcome"]}`,
-          //     MessageType.text
-          //   );
-          //   return;
-          //}
-           else if (
+
+          if (
+            msg.messages.array[0].key.fromMe &&
             msg.messages.array[0].message.conversation.toLowerCase().trim() ===
-            "back"
+              "continue"
           ) {
-            await conn.chatRead(msg.jid);
-            await conn.sendMessage(msg.jid, anwer["welcome"], MessageType.text);
-            await redis.set(`${msg.jid}`, "welcome", "EX", 60 * 60 * 12);
-          } else if (state === "welcome") {
-            //get converstion
-            let chat = msg.messages.array[0].message.conversation;
-            wa_interact.interactive_reply(conn, chat, msg.jid);
-            return;
-          } else if (state === "confirm") {
-            await conn.sendMessage(
-              msg.jid,
-              anwer["reply_confirm"],
-              MessageType.text
+            await redis.set(
+              `${msg.messages.array[0].key.remoteJid}`,
+              "welcome",
+              "EX",
+              60 * 60 * 12
             );
-            await redis.set(`${msg.jid}`, "dont_reply", "EX", 60 * 60 * 12);
-          } else if (state === "reply_9") {
-            await conn.sendMessage(msg.jid, anwer["reply_9"], MessageType.text);
-            await redis.set(`${msg.jid}`, "dont_reply", "EX", 60 * 60 * 12);
-          } else if (state === "dont_reply") {
+            return;
+          }
+          if (
+            msg.jid.includes("status") ||
+            msg.messages.array[0].key.fromMe ||
+            msg.jid.includes("broadcast") ||
+            msg.jid.includes("@g.us")
+          ) {
             return;
           } else {
-            return;
+            const state = await redis.get(`${msg.jid}`);
+            // const msg_history = await conn.loadMessages(msg.jid, 100);
+            const anwer = reply.answers();
+            //if state is null and has chat history
+            if (state === null) {
+              //mark message as read
+              await conn.chatRead(msg.jid);
+              await redis.set(`${msg.jid}`, "welcome", "EX", 60 * 60 * 12);
+              await conn.sendMessage(
+                msg.jid,
+                old_customers + `\n\n${anwer["welcome"]}`,
+                MessageType.text
+              );
+              return;
+            }
+            // } else if (state === null && msg_history.messages.length < 3) {
+            //   //mark message as read
+            //   await conn.chatRead(msg.jid);
+            //   await redis.set(`${msg.jid}`, "welcome", "EX", 60 * 60 * 12);
+            //   await conn.sendMessage(
+            //     msg.jid,
+            //     new_customers + `\n\n${anwer["welcome"]}`,
+            //     MessageType.text
+            //   );
+            //   return;
+            //}
+            else if (
+              msg.messages.array[0].message.conversation
+                .toLowerCase()
+                .trim() === "back"
+            ) {
+              await conn.chatRead(msg.jid);
+              await conn.sendMessage(
+                msg.jid,
+                anwer["welcome"],
+                MessageType.text
+              );
+              await redis.set(`${msg.jid}`, "welcome", "EX", 60 * 60 * 12);
+            } else if (state === "welcome") {
+              //get converstion
+              let chat = msg.messages.array[0].message.conversation;
+              wa_interact.interactive_reply(conn, chat, msg.jid);
+              return;
+            } else if (state === "confirm") {
+              await conn.sendMessage(
+                msg.jid,
+                anwer["reply_confirm"],
+                MessageType.text
+              );
+              await redis.set(`${msg.jid}`, "dont_reply", "EX", 60 * 60 * 12);
+            } else if (state === "reply_9") {
+              await conn.sendMessage(
+                msg.jid,
+                anwer["reply_9"],
+                MessageType.text
+              );
+              await redis.set(`${msg.jid}`, "dont_reply", "EX", 60 * 60 * 12);
+            } else if (state === "dont_reply") {
+              return;
+            } else {
+              return;
+            }
           }
         }
       }
     });
   } catch (e) {
     console.log(e);
+    return;
   }
 };
