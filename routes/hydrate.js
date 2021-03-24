@@ -13,7 +13,7 @@ exports.hydrate = async (conn) => {
       //avoid sending messages to group chat status, self or broadcast or none clients
       let clients = await redis.get("clients");
       let old_customers = await redis.get("old_customers");
-      let new_customers = await redis.get("new_customers");
+      //let new_customers = await redis.get("new_customers");
 
       if (clients !== null) {
         let list = clients.split("|");
@@ -99,6 +99,7 @@ exports.hydrate = async (conn) => {
                 MessageType.text
               );
               await redis.set(`${msg.jid}`, "welcome", "EX", 60 * 60 * 12);
+              return
             } else if (state === "welcome") {
               //get converstion
               let chat = msg.messages.array[0].message.conversation;
@@ -111,6 +112,7 @@ exports.hydrate = async (conn) => {
                 MessageType.text
               );
               await redis.set(`${msg.jid}`, "dont_reply", "EX", 60 * 60 * 12);
+              return
             } else if (state === "reply_9") {
               await conn.sendMessage(
                 msg.jid,
@@ -118,6 +120,7 @@ exports.hydrate = async (conn) => {
                 MessageType.text
               );
               await redis.set(`${msg.jid}`, "dont_reply", "EX", 60 * 60 * 12);
+              return
             } else if (state === "dont_reply") {
               return;
             } else {

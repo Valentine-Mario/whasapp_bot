@@ -46,12 +46,15 @@ Kindly be patient for my reply, i will be with you shortly ❤️`;
 
     await redis.set(`${number}`, `dont_reply`, "EX", 60 * 60 * 12);
     await conn.sendMessage(number, bola, MessageType.text);
+    return
   } else if (chat.toLowerCase().trim() === "full") {
     await redis.set(`${number}`, "dont_reply", "EX", 60 * 60 * 12);
+    return
   } else if (chat.toLowerCase().trim() === "confirm payment") {
     await conn.chatRead(number);
     await redis.set(`${number}`, "confirm", "EX", 60 * 60 * 12);
     await conn.sendMessage(number, anwer["confirm"], MessageType.text);
+    return
   } else if (chat.match(pattern)) {
     const reply_num = anwer[`${chat}`];
     if(chat.trim()==="9"){
@@ -64,6 +67,7 @@ Kindly be patient for my reply, i will be with you shortly ❤️`;
     }else{
       await conn.chatRead(number);
       await conn.sendMessage(number, bad_reply, MessageType.text);
+      return
     }
   }else{
     if(chat && (await redis.get(`${number}`))==="welcome"){
